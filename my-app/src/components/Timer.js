@@ -1,34 +1,54 @@
-import React from 'react';
+//import React from 'react';
+import React, { Component } from 'react';
 
-var msElapsed;
-var secondsElapsed;
-var minutesElapsed;
+// var msElapsed = 0;
+// var secondsElapsed = 0;
+// var minutesElapsed = 0;
 
-function Timer () {
+//var incrementer = setInterval(setSeconds, 1000);
 
-    Constructor();
+class Timer extends Component {
 
-    return (
-        <h2>{getSeconds()}</h2>
-    )
-}
+    constructor() {
 
-function Constructor() {
-    msElapsed = 0;
-    secondsElapsed = 0;
-    minutesElapsed = 0;
-}
+        super();
 
-function getMs() {
-    return msElapsed;
-}
+        this.state = {
+            secondsElapsed: 0,
+            minutesElapsed: 0, 
+            msElapsed: 0
+        }
+    }
 
-function getSeconds() {
-    return secondsElapsed;
-}
+    render() { 
+        return (
+            <div>
+            <h2>{this.getMinutes()}:{this.getSeconds()}:{this.getMS()}</h2>
+            </div>
+        )
+    } 
 
-function getMinutes() {
-    return minutesElapsed;
+    getMS() {
+        return ('0' + this.state.msElapsed % 1000).slice(-2);
+    }
+
+    getSeconds() {
+        return ('0' + Math.floor('0' + (this.state.msElapsed / 100) % 60 )).slice(-2);
+    }
+
+    getMinutes() {
+        //minutesElapsed = Math.floor(secondsElapsed / 60);
+        //return Math.floor('0' + this.state.secondsElapsed / 60);
+        return ('0' + Math.floor('0' + this.state.msElapsed / 6000)).slice(-2);
+    }
+
+    componentWillMount() {
+        setInterval( ()=>this.currentTime(), 10)
+    }
+
+    currentTime() {
+        this.setState( {msElapsed: this.state.msElapsed + 1} )
+    }
 }
 
 export default Timer
