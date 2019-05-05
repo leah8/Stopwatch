@@ -1,11 +1,4 @@
-//import React from 'react';
 import React, { Component } from 'react';
-
-// var msElapsed = 0;
-// var secondsElapsed = 0;
-// var minutesElapsed = 0;
-
-//var incrementer = setInterval(setSeconds, 1000);
 
 class Timer extends Component {
 
