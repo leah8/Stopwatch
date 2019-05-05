@@ -2,7 +2,10 @@ import React from 'react';
 
 function Buttons () {
     return (
-        <h3>Buttons</h3>
+        <div>
+            <button class="StartButton">Start</button>
+            <button class="StopButton">Stop</button>
+        </div>
     )
 }
 
