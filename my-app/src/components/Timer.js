@@ -1,14 +1,34 @@
 import React from 'react';
 
+var msElapsed;
+var secondsElapsed;
+var minutesElapsed;
+
 function Timer () {
+
+    Constructor();
+
     return (
-        <h2>{getInitialTime()}</h2>
+        <h2>{getSeconds()}</h2>
     )
 }
 
-function getInitialTime() {
-    var secondsElapsed = 0;
+function Constructor() {
+    msElapsed = 0;
+    secondsElapsed = 0;
+    minutesElapsed = 0;
+}
+
+function getMs() {
+    return msElapsed;
+}
+
+function getSeconds() {
     return secondsElapsed;
+}
+
+function getMinutes() {
+    return minutesElapsed;
 }
 
 export default Timer
