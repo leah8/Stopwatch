@@ -1,14 +1,17 @@
 import React from 'react';
 import './App.css';
-import AppTitle from './AppTitle'
+import AppTitle from './components/AppTitle'
+import Timer from './components/Timer'
+import Buttons from './components/Buttons'
+import Laps from './components/Laps'
 
 function App() {
   return (
     <div className="App">
     <AppTitle />
-      <header className="App-header">
-        <h1>Stopwatch</h1>
-      </header>
+    <Timer />
+    <Buttons />
+    <Laps />
     </div>
   );
 }
