@@ -17,8 +17,4 @@ function OnStopClick() {
     alert("stop clicked");
 }
 
-function getInitialTime() {
-    var secondsElapsed = 0;
-    return secondsElapsed;
-}
 export default Buttons
