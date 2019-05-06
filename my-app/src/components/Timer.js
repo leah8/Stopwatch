@@ -11,12 +11,17 @@ class Timer extends Component {
             minutesElapsed: 0, 
             msElapsed: 0
         }
+
+        this.handleStartClick = this.handleStartClick.bind(this);
+        this.handleStopClick = this.handleStopClick.bind(this);
     }
 
     render() { 
         return (
             <div>
             <h2>{this.getMinutes()}:{this.getSeconds()}:{this.getMS()}</h2>
+            <button onClick={this.handleStartClick}>start</button>
+            <button onClick={this.handleStopClick}>stop</button>
             </div>
         )
     } 
@@ -30,13 +35,24 @@ class Timer extends Component {
     }
 
     getMinutes() {
-        //minutesElapsed = Math.floor(secondsElapsed / 60);
-        //return Math.floor('0' + this.state.secondsElapsed / 60);
         return ('0' + Math.floor('0' + this.state.msElapsed / 6000)).slice(-2);
     }
 
-    componentWillMount() {
-        setInterval( ()=>this.currentTime(), 10)
+    // componentWillMount() {
+    //     setInterval( ()=>this.currentTime(), 10)
+    // }
+
+    handleStartClick() {
+        var _this = this;
+        this.incrementer = setInterval(function () {
+            _this.setState({
+                msElapsed: (_this.state.msElapsed + 1)
+            })
+        }, 10)
+    }
+
+    handleStopClick() {
+        clearInterval(this.incrementer);
     }
 
     currentTime() {
