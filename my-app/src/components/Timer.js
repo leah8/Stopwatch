@@ -15,6 +15,7 @@ class Timer extends Component {
         this.handleStartClick = this.handleStartClick.bind(this);
         this.handleStopClick = this.handleStopClick.bind(this);
         this.handleLapClick = this.handleLapClick.bind(this);
+        this.handleResetClick = this.handleResetClick.bind(this);
     }
 
     render() { 
@@ -24,6 +25,7 @@ class Timer extends Component {
                 <button class="StartButton" onClick={this.handleStartClick}>Start</button>
                 <button class="StopButton" onClick={this.handleStopClick}>Stop</button>
                 <button class="LapButton" onClick={this.handleLapClick}>Lap</button>
+                <button class="ResetButton" onClick={this.handleResetClick}>Reset</button>
                 <div id="lap-area" class="hideUntilNeeded">
                     <h3>Laps:</h3>
                     <div id="lap-space"></div>
@@ -69,6 +71,15 @@ class Timer extends Component {
         var minutes = this.getMinutes();
         document.getElementById("lap-space").innerHTML += minutes.toString() + ":" + seconds.toString() + ":" + ms.toString();
         document.getElementById("lap-space").innerHTML += "<br/>";
+    }
+
+    handleResetClick() {
+        clearInterval(this.incrementer);
+        this.setState ({
+            msElapsed: 0,
+            secondsElapsed: 0,
+            minutesElapsed: 0
+        })
     }
 
     currentTime() {
