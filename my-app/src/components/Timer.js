@@ -14,14 +14,20 @@ class Timer extends Component {
 
         this.handleStartClick = this.handleStartClick.bind(this);
         this.handleStopClick = this.handleStopClick.bind(this);
+        this.handleLapClick = this.handleLapClick.bind(this);
     }
 
     render() { 
         return (
             <div>
-            <h2>{this.getMinutes()}:{this.getSeconds()}:{this.getMS()}</h2>
-            <button onClick={this.handleStartClick}>start</button>
-            <button onClick={this.handleStopClick}>stop</button>
+                <h2>{this.getMinutes()}:{this.getSeconds()}:{this.getMS()}</h2>
+                <button class="StartButton" onClick={this.handleStartClick}>Start</button>
+                <button class="StopButton" onClick={this.handleStopClick}>Stop</button>
+                <button class="LapButton" onClick={this.handleLapClick}>Lap</button>
+                <div id="lap-area" class="hideUntilNeeded">
+                    <h3>Laps:</h3>
+                    <div id="lap-space"></div>
+                </div>
             </div>
         )
     } 
@@ -53,6 +59,16 @@ class Timer extends Component {
 
     handleStopClick() {
         clearInterval(this.incrementer);
+    }
+
+    handleLapClick() {
+        document.getElementById("lap-area").classList.remove("hideUntilNeeded");
+        document.getElementById("lap-area").classList.add("showWhenNeeded");
+        var ms = this.getMS();
+        var seconds = this.getSeconds();
+        var minutes = this.getMinutes();
+        document.getElementById("lap-space").innerHTML += minutes.toString() + ":" + seconds.toString() + ":" + ms.toString();
+        document.getElementById("lap-space").innerHTML += "<br/>";
     }
 
     currentTime() {
