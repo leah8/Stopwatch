@@ -44,28 +44,36 @@
   transition: all ease-in-out 400ms;
 }
 
-.StartButton:hover {
+.StartButton:hover,
+.StartButton:focus {
   background: rgba(255, 255, 255, 1);
   color: rgba(118, 180, 126, 1);
   transition: all ease-in-out 400ms;
+  outline: none;
 }
 
-.StopButton:hover {
+.StopButton:hover,
+.StopButton:focus {
   background: rgba(255, 255, 255, 1);
   color: rgba(207, 109, 52, 1);
   transition: all ease-in-out 400ms;
+  outline: none;
 }
 
-.LapButton:hover {
+.LapButton:hover,
+.LapButton:focus  {
   background: rgba(255, 255, 255, 1);
   color: rgba(73, 60, 255, 1);
   transition: all ease-in-out 400ms;
+  outline: none;
 }
 
-.ResetButton:hover {
+.ResetButton:hover, 
+.ResetButton:focus {
   background: rgba(255, 255, 255, 1);
   color: rgba(66, 66, 70, 1);
   transition: all ease-in-out 400ms;
+  outline: none;
 }
 
 .hideUntilNeeded {

@@ -9,7 +9,8 @@ class Timer extends Component {
         this.state = {
             secondsElapsed: 0,
             minutesElapsed: 0, 
-            msElapsed: 0
+            msElapsed: 0,
+            currentState: 'initial'
         }
 
         this.handleStartClick = this.handleStartClick.bind(this);
@@ -46,40 +47,58 @@ class Timer extends Component {
         return ('0' + Math.floor('0' + this.state.msElapsed / 6000)).slice(-2);
     }
 
-    // componentWillMount() {
-    //     setInterval( ()=>this.currentTime(), 10)
-    // }
+    getCurrentState() {
+        return this.state.currentState;
+    }
+
+    setCurrentState(newState) {
+        this.setState( {
+            currentState: newState
+        })
+    }
 
     handleStartClick() {
-        var _this = this;
-        this.incrementer = setInterval(function () {
-            _this.setState({
-                msElapsed: (_this.state.msElapsed + 1)
-            })
-        }, 10)
+        if(this.getCurrentState() !== 'running') {
+            this.setCurrentState('running')
+            var _this = this;
+            this.incrementer = setInterval(function () {
+                _this.setState({
+                    msElapsed: (_this.state.msElapsed + 1)
+                })
+            }, 10)
+        }
     }
 
     handleStopClick() {
-        clearInterval(this.incrementer);
+        if(this.getCurrentState() !== 'stopped') {
+            this.setCurrentState('stopped')
+            clearInterval(this.incrementer);
+        }
     }
 
     handleLapClick() {
+        
         document.getElementById("lap-area").classList.remove("hideUntilNeeded");
         document.getElementById("lap-area").classList.add("showWhenNeeded");
         var ms = this.getMS();
         var seconds = this.getSeconds();
         var minutes = this.getMinutes();
-        document.getElementById("lap-space").innerHTML += minutes.toString() + ":" + seconds.toString() + ":" + ms.toString();
-        document.getElementById("lap-space").innerHTML += "<br/>";
-    }
+        document.getElementById("lap-space").innerHTML += minutes.toString() + ":" + seconds.toString() + ":" + ms.toString() + "<br/>";
+     }
 
     handleResetClick() {
-        clearInterval(this.incrementer);
-        this.setState ({
-            msElapsed: 0,
-            secondsElapsed: 0,
-            minutesElapsed: 0
-        })
+        if(this.getCurrentState() !== 'initial') {
+            this.setCurrentState('initial')
+            clearInterval(this.incrementer);
+            this.setState ({
+                msElapsed: 0,
+                secondsElapsed: 0,
+                minutesElapsed: 0
+            })
+        }
+        document.getElementById("lap-area").classList.remove("showWhenNeeded");
+        document.getElementById("lap-area").classList.add("hideUntilNeeded");
+        document.getElementById("lap-space").innerHTML = "";
     }
 
     currentTime() {
